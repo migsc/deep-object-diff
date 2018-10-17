@@ -7,7 +7,8 @@
   "files": [
     "dist",
     "index.d.ts",
-    "README.md"
+    "README.md",
+    "src"
   ],
   "scripts": {
     "build": "babel src -d dist --ignore *.test.js",
