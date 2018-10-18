@@ -46,17 +46,30 @@
     return target;
   };
 
+  var _strikethrough = function _strikethrough(text) {
+    return (text.split("").join("\u0336") + "\u0336").trim();
+  };
+  var _toString = function _toString(o) {
+    return (0, _utils.isDate)(o) ? o.toISOString() : o ? o + "" : o.toString();
+  };
+
   var updatedDiff = function updatedDiff(lhs, rhs) {
     if (lhs === rhs) return {};
 
-    if (!(0, _utils.isObject)(lhs) || !(0, _utils.isObject)(rhs)) return lhs.toString().split("").join("\u0336") + " " + rhs.toString();
+    if (!(0, _utils.isObject)(lhs) || !(0, _utils.isObject)(rhs)) {
+      var lhsFormatted = _strikethrough(_toString(lhs));
+      var rhsFormatted = _strikethrough(_toString(rhs));
+      return lhsFormatted + "=>" + rhsFormatted;
+    }
 
     var l = (0, _utils.properObject)(lhs);
     var r = (0, _utils.properObject)(rhs);
 
     if ((0, _utils.isDate)(l) || (0, _utils.isDate)(r)) {
       if (l.valueOf() == r.valueOf()) return {};
-      return l.toISOString().split("").join("\u0336") + " " + r.toISOString();
+      var _lhsFormatted = _strikethrough(_toString(l));
+      var _rhsFormatted = _strikethrough(_toString(r));
+      return _lhsFormatted + "=>" + _rhsFormatted;
     }
 
     return Object.keys(r).reduce(function (acc, key) {
