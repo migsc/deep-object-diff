@@ -1,23 +1,27 @@
 import { isDate, isEmpty, isObject, properObject } from "../utils";
 
+const _strikethrough = text =>
+  (text.split("").join("\u0336") + "\u0336").trim();
+const _toString = o =>
+  isDate(o) ? o.toISOString() : o ? o + "" : o.toString();
+
 const updatedDiff = (lhs, rhs) => {
   if (lhs === rhs) return {};
 
-  if (!isObject(lhs) || !isObject(rhs))
-    return `${lhs
-      .toString()
-      .split("")
-      .join("\u0336")} ${rhs.toString()}`;
+  if (!isObject(lhs) || !isObject(rhs)) {
+    let lhsFormatted = _strikethrough(_toString(lhs));
+    let rhsFormatted = _strikethrough(_toString(rhs));
+    return `${lhsFormatted}=>${rhsFormatted}`;
+  }
 
   const l = properObject(lhs);
   const r = properObject(rhs);
 
   if (isDate(l) || isDate(r)) {
     if (l.valueOf() == r.valueOf()) return {};
-    return `${l
-      .toISOString()
-      .split("")
-      .join("\u0336")} ${r.toISOString()}`;
+    let lhsFormatted = _strikethrough(_toString(l));
+    let rhsFormatted = _strikethrough(_toString(r));
+    return `${lhsFormatted}=>${rhsFormatted}`;
   }
 
   return Object.keys(r).reduce((acc, key) => {
