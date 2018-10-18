@@ -62,7 +62,7 @@
 
     if (!(0, _utils.isObject)(lhs) || !(0, _utils.isObject)(rhs)) {
       var lhsFormatted = _strikethrough(_toString(lhs));
-      var rhsFormatted = _strikethrough(_toString(rhs));
+      var rhsFormatted = _toString(rhs);
       return lhsFormatted + "=>" + rhsFormatted;
     }
 
@@ -72,7 +72,7 @@
     if ((0, _utils.isDate)(l) || (0, _utils.isDate)(r)) {
       if (l.valueOf() == r.valueOf()) return {};
       var _lhsFormatted = _strikethrough(_toString(l));
-      var _rhsFormatted = _strikethrough(_toString(r));
+      var _rhsFormatted = _toString(r);
       return _lhsFormatted + "=>" + _rhsFormatted;
     }
 
