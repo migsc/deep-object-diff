@@ -15,7 +15,7 @@ const updatedDiff = (lhs, rhs) => {
 
   if (!isObject(lhs) || !isObject(rhs)) {
     let lhsFormatted = _strikethrough(_toString(lhs));
-    let rhsFormatted = _strikethrough(_toString(rhs));
+    let rhsFormatted = _toString(rhs);
     return `${lhsFormatted}=>${rhsFormatted}`;
   }
 
@@ -25,7 +25,7 @@ const updatedDiff = (lhs, rhs) => {
   if (isDate(l) || isDate(r)) {
     if (l.valueOf() == r.valueOf()) return {};
     let lhsFormatted = _strikethrough(_toString(l));
-    let rhsFormatted = _strikethrough(_toString(r));
+    let rhsFormatted = _toString(r);
     return `${lhsFormatted}=>${rhsFormatted}`;
   }
 
