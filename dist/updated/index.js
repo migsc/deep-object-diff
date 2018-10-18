@@ -50,7 +50,11 @@
     return (text.split("").join("\u0336") + "\u0336").trim();
   };
   var _toString = function _toString(o) {
-    return (0, _utils.isDate)(o) ? o.toISOString() : o ? o + "" : o.toString();
+    try {
+      return (0, _utils.isDate)(o) ? o.toISOString() : o.toString();
+    } catch (e) {
+      return o + "";
+    }
   };
 
   var updatedDiff = function updatedDiff(lhs, rhs) {

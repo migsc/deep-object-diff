@@ -2,8 +2,13 @@ import { isDate, isEmpty, isObject, properObject } from "../utils";
 
 const _strikethrough = text =>
   (text.split("").join("\u0336") + "\u0336").trim();
-const _toString = o =>
-  isDate(o) ? o.toISOString() : o ? o + "" : o.toString();
+const _toString = o => {
+  try {
+    return isDate(o) ? o.toISOString() : o.toString();
+  } catch (e) {
+    return o + "";
+  }
+};
 
 const updatedDiff = (lhs, rhs) => {
   if (lhs === rhs) return {};
